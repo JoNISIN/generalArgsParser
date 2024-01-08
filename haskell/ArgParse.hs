@@ -46,11 +46,10 @@ isTrigger arg k =
         Just x  -> True
 
 main = do
-    putStrLn "Auto Test"
     args <- getArgs
     let parser  = setParser [("-v",0),("--echo",1)]
-    let parser1 = setDefaultFromList parser [("-v",Nothing),("--echo",Just ["Hello, workd!"])]
-    let parsed = parseArgsList parser1 args
+    let parser' = setDefaultFromList parser [("-v",Nothing),("--echo",Just ["Hello, workd!"])]
+    let parsed = parseArgsList parser' args
     print $ parsedSeq parsed
     print $ isTrigger parsed "-v"
     print $ parsedArgOf parsed "hi"
