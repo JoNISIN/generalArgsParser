@@ -20,13 +20,15 @@
 ### Haskell
 ```haskell
 args <- getArgs -- haskell讀取參數
-let parser  = setParser [("-v",0),("--echo",1)] -- 定義key名稱與key所需的參數數量
-let parser' = setDefaultFromList parser [("-v",Nothing),("--echo",Just ["Hello, workd!"])] -- 定義key的初始值
-let parsed = parseArgsList parser' args -- 解析參數
-print $ parsedSeq parsed                -- 未被特定key接收的有序列表(剩餘參數)
-print $ isTrigger parsed "-v"           -- 不需要額外參數，僅確認是否啟用選項
-print $ parsedArgOf parsed "hi"         -- 不存在的key回傳空字串
-print $ parsedArgOf parsed "--echo"     -- 存在的key回傳指定字串
+let parser  = setParser [("-v",0),("--echo",1)]              -- 定義key名稱與key所需的參數數量
+let parser' =
+      setDefaultFromList parser
+          [("-v",Nothing),("--echo",Just ["Hello, workd!"])] -- 定義key的初始值
+let parsed = parseArgsList parser' args                      -- 解析參數
+print $ parsedSeq parsed                                     -- 未被特定key接收的有序列表(剩餘參數)
+print $ isTrigger parsed "-v"                                -- 不需要額外參數，僅確認是否啟用選項
+print $ parsedArgOf parsed "hi"                              -- 不存在的key回傳空字串
+print $ parsedArgOf parsed "--echo"                          -- 存在的key回傳指定字串
 ```
 
 ### Python
